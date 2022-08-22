@@ -2,3 +2,17 @@
 <p><%= @movie.overview %></p>
 <p><%= @movie.poster_url %></p>
 <p><%= @movie.rating %></p>
+
+<div><%= @bookmarks.count %></div>
+
+<ul>
+  <% @bookmarks.each do |bookmark| %>
+    <li class="list-group-item">
+      <%= bookmark.comment %>
+      <%= link_to "Delete",
+        bookmark_path(bookmark),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+      %>
+    </li>
+  <% end %>
+</ul>

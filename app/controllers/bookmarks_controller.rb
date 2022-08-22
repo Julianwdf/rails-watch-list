@@ -9,6 +9,8 @@ class BookmarksController < ApplicationController
   end
 
   def new
+    # raise
+    @list = List.find(params[:list_id])
     @bookmark = Bookmark.new
   end
 
@@ -21,6 +23,12 @@ class BookmarksController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @bookmark = Bookmark.find(params[:id])
+    @bookmark.destroy
+    redirect_to list_path(@bookmark.list), status: :see_other
   end
 
 
